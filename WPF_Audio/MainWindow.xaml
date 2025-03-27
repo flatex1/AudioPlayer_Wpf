@@ -1,0 +1,103 @@
+﻿<Window x:Class="WPF_Audio.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:fa="http://schemas.fontawesome.io/icons/"
+        Title="Аудиоплеер" Height="800" Width="1300"
+        Background="#0d0d0d">
+    <Grid>
+        <Border Canvas.Left="55" Canvas.Top="30" Width="auto" Height="auto" Margin="231,10,9,100" VerticalAlignment="Top"
+                BorderBrush="#0d0d0d" BorderThickness="0.5" CornerRadius="18">
+            <Border Name="ReceiverColor" Background="#121212" BorderBrush="#0d0d0d" BorderThickness="6" CornerRadius="15">
+                <Grid>
+                    <Border Name="Mask" Background="#121212" BorderBrush="#0d0d0d" BorderThickness="0.5" CornerRadius="13"/>
+                    <Image  x:Name="BackGround_photo" Source="C:\Users\kabin\Desktop\WPF_Audio\WPF_Audio\Assets\default1.jpg"  Stretch="UniformToFill" 
+                            MinWidth="300" MinHeight="300">
+                        <Image.Effect>
+                            <BlurEffect Radius="30"/>
+                        </Image.Effect>
+                    </Image>
+
+                    <Border x:Name="Overlay" Background="#121212" Opacity="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <Frame x:Name="PageFrame" Background="Transparent" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <Grid.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=Mask}" />
+                    </Grid.OpacityMask>
+                </Grid>
+            </Border>
+        </Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="90" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Background="#0d0d0d">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Vertical" Grid.Row="0" >
+                    <Button Content="Абубакар" Tag="User" Style="{StaticResource ButtonStyle}"/>
+                    <Button Content="Главная" Click="GoToHomePage" Tag="Home" Style="{StaticResource ButtonStyle}"/>
+                    <Button Content="Библиотека" Click="GoToLibraryPage" Tag="Book" Style="{StaticResource ButtonStyle}"/>
+                    <Button Content="Плейлисты" Click="GoToPlayListsPage" Tag="Music" Style="{StaticResource ButtonStyle}"/>
+                </StackPanel>
+                <Button Content="Настройки" Tag="Cog" Grid.Row="1" Margin="20,0,0,30" HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}"/>
+            </Grid>
+
+            <StackPanel x:Name="NowPlayingPanel" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                        Background="#F5F5F5" Opacity="0.9">
+                <Image x:Name="NowPlayingImage" Source="C:\Users\kabin\Desktop\WPF_Audio\WPF_Audio\Assets\default1.jpg" 
+                       Stretch="Uniform" MaxWidth="250" MaxHeight="250"/>
+                <TextBlock x:Name="NowPlayingTitle" Text="Now Playing" FontSize="18" FontWeight="Bold" Foreground="Black" 
+                           HorizontalAlignment="Center" Margin="10,5,0,0"/>
+                <TextBlock x:Name="NowPlayingPerformer" Text="" FontSize="14" Foreground="Black" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+            </StackPanel>
+
+            <Border Grid.Row="1" Grid.Column="1" Background="#9c9c2f" Margin="7,0,15,10" CornerRadius="15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
+                        <Image x:Name="ControlPanel_photo" Source="Assets/default1.jpg"
+                   Stretch="UniformToFill" Width="60" Height="60"/>
+                        <StackPanel Orientation="Vertical" Margin="8,0" VerticalAlignment="Center" Width="150">
+                            <TextBlock x:Name="ControlPanelTitle" Text="Название" FontSize="14" Foreground="#fefefd" 
+                                       FontWeight="Bold" TextTrimming="CharacterEllipsis" />
+                            <TextBlock x:Name="ControlPanelPerformer" Text="Исполнитель" FontSize="12" Foreground="#cece97" 
+                                       FontWeight="Bold" TextTrimming="CharacterEllipsis" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                            <Button x:Name="PrevButton" Content="⏮" Background="Transparent" Foreground="#444" 
+                                    Margin="0,10,10,10" FontSize="14" Click="PrevButton_Click"/>
+                            <Button x:Name="PlayPauseButton" Content="⏯" Background="#0078D4" Foreground="White" Margin="0,10,0,10" FontSize="14" 
+                                    Padding="5" Click="PlayPauseButton_Click"/>
+                            <Button x:Name="NextButton" Content="⏭" Background="Transparent" Foreground="#444" Margin="10,10,0,10" 
+                                    FontSize="14" Click="NextButton_Click"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,20,0">
+                            <TextBlock x:Name="CurrentTimeText" Text="00:00" VerticalAlignment="Center" Margin="10,0" />
+                            <Slider x:Name="ProgressSlider" Width="300" VerticalAlignment="Center" Minimum="0" 
+                                    Maximum="100" ValueChanged="ProgressSlider_Value" />
+                            <TextBlock x:Name="TotalTimeText" Text="00:00" VerticalAlignment="Center" Margin="10,0" />
+                        </StackPanel>
+                    </StackPanel>
+                    <Slider x:Name="VolumeSlider" Grid.Column="2" Width="100" Margin="10,0,30,0" VerticalAlignment="Center"
+                            Minimum="0" Maximum="1" Value="0.5" ValueChanged="VolumeSlider_Value" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
