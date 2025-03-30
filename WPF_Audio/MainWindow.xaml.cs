@@ -136,13 +136,13 @@ namespace WPF_Audio
             if (isPaused)
             {
                 AudioService.Instance.Resume();
-                PlayPauseButton.Content = "▶";
+                PlayPauseButton.Tag = "Play";
                 isPaused = false;
             }
             else
             {
                 AudioService.Instance.Pause();
-                PlayPauseButton.Content = "▶";
+                PlayPauseButton.Tag = "Stop";
                 isPaused = true;
             }
         }

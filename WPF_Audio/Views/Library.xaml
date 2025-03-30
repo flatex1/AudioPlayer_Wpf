@@ -16,14 +16,11 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" >
                 <TextBlock Text="Музыка" FontSize="40" FontWeight="Bold" VerticalAlignment="Center" Foreground="White" />
-                <Button Content="Композиции" Foreground="White" FontSize="19" Padding="10" Margin="0,20,0,0" Style="{StaticResource ButtonStyle}"/>
-                <Button Content="Альбомы" Foreground="White" FontSize="19" Padding="10" Margin="0,20,0,0" Style="{StaticResource ButtonStyle}"/>
-                <Button Content="Исполнители" Foreground="White" FontSize="19" Padding="10" Margin="0,20,0,0" Style="{StaticResource ButtonStyle}"/>
             </StackPanel>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-                <Button Content="Добавить папку" Tag="Folder" Foreground="White" FontSize="19" Padding="10" Margin="0,20,15,0" Click="AddFolderButton_Click" Style="{StaticResource ButtonStyle}"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Добавить папку" Tag="Folder" Foreground="White" FontSize="19" Padding="10" Margin="0,20,25,0" Click="AddFolderButton_Click" Style="{StaticResource ButtonStyle}"/>
                 <Button Content="Добавить файл" Tag="Folder" Foreground="White" FontSize="19" Padding="10" Margin="0,20,15,0" Click="AddFileButton_Click" Style="{StaticResource ButtonStyle}"/>
             </StackPanel>
         </Grid>

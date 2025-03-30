@@ -90,6 +90,5 @@ namespace WPF_Audio.ViewModels
                 System.Windows.MessageBox.Show($"Ошибка добавления трека в плейлист: {ex.Message}");
             }
         }
-
     }
 }

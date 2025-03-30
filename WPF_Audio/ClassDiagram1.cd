@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WPF_Audio.App">
+    <Position X="21" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPF_Audio.Library" BaseTypeListCollapsed="true">
+    <Position X="24.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAEAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Views\Library.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WPF_Audio.MainPage" BaseTypeListCollapsed="true">
+    <Position X="21" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\MainPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WPF_Audio.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="21" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AMAQAAAAgEAIBAAAAAIAAAAAIgEAAACBAAAAgAAAIIA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WPF_Audio.NamePlaylist" BaseTypeListCollapsed="true">
+    <Position X="19.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\NamePlaylist.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WPF_Audio.PlaylistDetailPage" BaseTypeListCollapsed="true">
+    <Position X="22.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAEEIAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Views\PlaylistDetailPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WPF_Audio.PlayLists" BaseTypeListCollapsed="true">
+    <Position X="24.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAGAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\PlayLists.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WPF_Audio.SelectTrack" BaseTypeListCollapsed="true">
+    <Position X="21" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAgAAAAAAIAAgAAAAAAAAA=</HashCode>
+      <FileName>Views\SelectTrack.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WPF_Audio.Data.AudioDbContext">
+    <Position X="22.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAQAACAAAAABAAAAAEAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\AudioDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPF_Audio.Migrations.AudioDbContextModelSnapshot">
+    <Position X="24.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Migrations\AudioDbContextModelSnapshot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPF_Audio.Migrations.InitialCreate">
+    <Position X="19.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAI=</HashCode>
+      <FileName>Migrations\20250312102656_InitialCreate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPF_Audio.Models.AudioTrack">
+    <Position X="19.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAABAACAGAAAAIAAAAAAQAAAAAAAABACAAAAAA=</HashCode>
+      <FileName>Models\AudioTrack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPF_Audio.Models.Playlist">
+    <Position X="19.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Playlist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPF_Audio.Models.PlaylistTrack">
+    <Position X="24.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAESAAAAAACAAAAAAAABAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Models\PlaylistTrack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPF_Audio.Models.QueueItem">
+    <Position X="24.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Models\QueueItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPF_Audio.Services.AudioService">
+    <Position X="22.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAkAAIAAgAAAAAACAAAEAgAAAAAAAKG4AIAAAgAAAA=</HashCode>
+      <FileName>Services\AudioService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPF_Audio.ViewModels.BaseViewModel">
+    <Position X="15" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\BaseViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WPF_Audio.ViewModels.LibraryViewModel">
+    <Position X="13" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAICAAAEAAAAACAIIJAAAAAAAAAEAAAABCAQgAARQ=</HashCode>
+      <FileName>ViewModels\LibraryViewModel .cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPF_Audio.ViewModels.PlaylistDetailViewModel">
+    <Position X="15" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\PlaylistDetailViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPF_Audio.ViewModels.PlaylistsViewModel">
+    <Position X="17" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAARAAAAAAAAIAAAAAAAAAAAAEAEAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\PlayListsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
