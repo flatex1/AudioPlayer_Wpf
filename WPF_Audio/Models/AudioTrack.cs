@@ -17,5 +17,6 @@ namespace WPF_Audio.Models
         public string Genre { get; set; }
         public TimeSpan Duration { get; set; }
         public string FilePath { get; set; }
+        public bool IsLiked { get; set; }
     }
 }

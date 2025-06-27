@@ -1,11 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF">
+                    xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+                    xmlns:local="clr-namespace:WPF_Audio.Converters">
     <Style x:Key="ButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="#868686"/>
-        <Setter Property="FontSize" Value="26"/>
-        <Setter Property="Margin" Value="20,20,0,0"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Margin" Value="20,30,0,0"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Template">
@@ -16,7 +17,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <fa:ImageAwesome Grid.Column="0" Icon="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Tag}" Foreground="White" Width="20" Height="20" Margin="0,0,10,0"/>
+                        <fa:ImageAwesome Grid.Column="0" Icon="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Tag}" Foreground="#868686" Width="20" Height="20" Margin="0,0,10,0"/>
                         <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                     </Grid>
                 </ControlTemplate>
@@ -38,5 +39,63 @@
                 <Setter Property="Foreground" Value="#FFC7C7C7"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+    <Style x:Key="SortComboBoxStyle" TargetType="ComboBox">
+        <Setter Property="Foreground" Value="#222"/>
+        <Setter Property="Background" Value="#ececec"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="BorderBrush" Value="#b0b0b0"/>
+    </Style>
+    <Style TargetType="ComboBoxItem" x:Key="SortComboBoxItemStyle">
+        <Setter Property="Background" Value="#ececec"/>
+        <Setter Property="Foreground" Value="#222"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#d3e0ea"/>
+                <Setter Property="Foreground" Value="#222"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="#b8c6db"/>
+                <Setter Property="Foreground" Value="#222"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="SearchTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="#ececec"/>
+        <Setter Property="Foreground" Value="#222"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Padding" Value="8,2"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="0,0,10,0"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

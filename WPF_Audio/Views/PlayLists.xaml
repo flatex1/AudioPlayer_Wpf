@@ -16,7 +16,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Grid.Row="0"  Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
-                <TextBlock Text="Список воспроизведения" FontSize="40" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" />
+                <TextBlock FontSize="24" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White" ><Run Language="ru-ru" Text="Плейлисты"/></TextBlock>
             </StackPanel>
         </Grid>
 
@@ -27,7 +27,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button Content="+ Создать новый список воспроизведения" Tag="trash" Background="#FFD43B30" FontSize="17" 
+                <Button Content="+ Создать новый плейлист" Tag="trash" Background="#4a5759" FontSize="17" 
                         Foreground="White" Padding="10" Margin="10" Click="CreatePlaylist_Click">
                     <Button.Resources>
                         <Style TargetType="Border">

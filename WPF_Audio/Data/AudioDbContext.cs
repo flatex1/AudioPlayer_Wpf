@@ -14,6 +14,8 @@ namespace WPF_Audio.Data
         public DbSet<Playlist> Playlists { get; set; }
         public DbSet<PlaylistTrack> PlaylistTracks { get; set; }
         public DbSet<QueueItem> QueueItems { get; set; }
+        public DbSet<HotkeySetting> HotkeySettings { get; set; }
+        public DbSet<TrackFeature> TrackFeatures { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

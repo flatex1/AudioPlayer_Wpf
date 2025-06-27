@@ -14,6 +14,8 @@ namespace WPF_Audio.Services
 
         public float Volume { get; private set; } = 0.5f;
 
+        private bool isManualStop = false;
+
         public void SetVolume(double volume)
         {
             Volume = (float)volume;
@@ -25,23 +27,37 @@ namespace WPF_Audio.Services
 
         public void Play(string filePath)
         {
-            Stop();
-            outputDevice = new WaveOutEvent();
-            audioFile = new AudioFileReader(filePath)
+            isManualStop = false;
+            if (outputDevice != null)
             {
-                Volume = Volume
-            };
-            outputDevice.Init(audioFile);
-            outputDevice.PlaybackStopped += OnPlaybackStopped; 
-            outputDevice.Play();
+                outputDevice.PlaybackStopped -= OnPlaybackStopped;
+            }
+            Stop();
+            try
+            {
+                outputDevice = new WaveOutEvent();
+                audioFile = new AudioFileReader(filePath)
+                {
+                    Volume = Volume
+                };
+                outputDevice.Init(audioFile);
+                outputDevice.PlaybackStopped += OnPlaybackStopped;
+                outputDevice.Play();
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show($"Ошибка воспроизведения аудио:\n{ex.Message}", "Ошибка NAudio", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                Stop();
+            }
         }
 
         private void OnPlaybackStopped(object sender, StoppedEventArgs e)
         {
-            if (e.Exception == null)
+            if (!isManualStop && e.Exception == null)
             {
                 PlaybackFinished?.Invoke(this, EventArgs.Empty);
             }
+            isManualStop = false;
         }
 
         public void Pause()
@@ -76,10 +92,9 @@ namespace WPF_Audio.Services
             }
         }
 
-
-
         public void Stop()
         {
+            isManualStop = true;
             if (outputDevice != null)
             {
                 outputDevice.Stop();

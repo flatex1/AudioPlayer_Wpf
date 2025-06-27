@@ -11,16 +11,23 @@
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
             <TextBlock Text="{Binding Playlist.Name}" FontSize="30" Foreground="White" Margin="0,0,10,0"/>
-            <Button Content="Добавить трек" Click="AddTrackButton_Click" Background="#FFD43B30" FontSize="17" 
-                    Foreground="White" Margin="0,0,10,0" HorizontalAlignment="Right">
+            <Button Content="Добавить трек" Click="AddTrackButton_Click" Background="#4a5759" FontSize="17" 
+                    Foreground="White" Margin="0,0,10,0" HorizontalAlignment="Right" Padding="10, 0">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="8"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content="Удалить плейлист" Click="DeletePlaylistButton_Click" Background="#FFD43B30" FontSize="17" 
-                    Foreground="White" Margin="0,0,10,0" HorizontalAlignment="Right">
+            <Button Content="Удалить плейлист" Click="DeletePlaylistButton_Click" Background="#4a5759" FontSize="17" 
+                    Foreground="White" Margin="0,0,10,0" HorizontalAlignment="Right" Padding="10, 0">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="8"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Сканирование" Background="#4a5759" FontSize="17" Foreground="White" Margin="0,0,10,0" HorizontalAlignment="Right" Padding="10, 0" Click="ScanPlaylistTracksButton_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="8"/>

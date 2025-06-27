@@ -8,6 +8,11 @@ using System.Windows;
 using System.Windows.Data;
 using WPF_Audio.Data;
 using WPF_Audio.Models;
+using NWaves.Audio;
+using NWaves.FeatureExtractors;
+using NWaves.FeatureExtractors.Base;
+using NWaves.Transforms;
+using NWaves.Utils;
 
 namespace WPF_Audio.ViewModels
 {
@@ -48,6 +53,21 @@ namespace WPF_Audio.ViewModels
                     _selectedGenre = value;
                     OnPropertyChanged();
                     TracksView.Refresh();
+                }
+            }
+        }
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                if (_searchText != value)
+                {
+                    _searchText = value;
+                    OnPropertyChanged();
+                    TracksView?.Refresh();
                 }
             }
         }
@@ -127,6 +147,11 @@ namespace WPF_Audio.ViewModels
         {
             if (item is AudioTrack track)
             {
+                if (!string.IsNullOrEmpty(SearchText) &&
+                    !(track.Title?.IndexOf(SearchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                      track.Performer?.IndexOf(SearchText, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                      track.Album?.IndexOf(SearchText, StringComparison.OrdinalIgnoreCase) >= 0))
+                    return false;
                 if (string.IsNullOrEmpty(SelectedGenre) || SelectedGenre == "Все")
                     return true;
                 return track.Genre.Equals(SelectedGenre, StringComparison.OrdinalIgnoreCase);
@@ -220,7 +245,7 @@ namespace WPF_Audio.ViewModels
         {
             var dialog = new Microsoft.Win32.OpenFileDialog
             {
-                Filter = "Audio files|*.mp3;*.wav;*.flac;*.aac;*.ogg",
+                Filter = "Аудиофайлы|*.mp3;*.wav;*.flac;*.aac;*.ogg",
                 Multiselect = false
             };
             if (dialog.ShowDialog() == true)
@@ -270,6 +295,68 @@ namespace WPF_Audio.ViewModels
                 System.Windows.MessageBox.Show($"Ошибка при обработке файла {Path.GetFileName(file)}:\n{ex.Message}",
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        public void ScanTracks()
+        {
+            int processed = 0;
+            foreach (var track in Tracks)
+            {
+                try
+                {
+                    // Преобразуем в WAV, если нужно (NAudio)
+                    string wavPath = track.FilePath;
+                    if (!track.FilePath.ToLower().EndsWith(".wav"))
+                    {
+                        wavPath = Path.ChangeExtension(Path.GetTempFileName(), ".wav");
+                        using (var reader = new NAudio.Wave.AudioFileReader(track.FilePath))
+                        using (var writer = new NAudio.Wave.WaveFileWriter(wavPath, reader.WaveFormat))
+                        {
+                            reader.CopyTo(writer);
+                        }
+                    }
+
+                    // Извлекаем MFCC
+                    float[] meanMfcc;
+                    using (var stream = new FileStream(wavPath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                    {
+                        var wave = new WaveFile(stream);
+                        var samples = wave[Channels.Left];
+                        var mfccExtractor = new MfccExtractor(new NWaves.FeatureExtractors.Options.MfccOptions { SamplingRate = wave.WaveFmt.SamplingRate, FeatureCount = 13 });
+                        var mfccs = mfccExtractor.ComputeFrom(samples);
+                        meanMfcc = new float[mfccs[0].Length];
+                        foreach (var frame in mfccs)
+                            for (int i = 0; i < frame.Length; i++)
+                                meanMfcc[i] += frame[i];
+                        for (int i = 0; i < meanMfcc.Length; i++)
+                            meanMfcc[i] /= mfccs.Count;
+                    }
+                    var mfccString = string.Join(",", meanMfcc.Select(f => f.ToString("F4", System.Globalization.CultureInfo.InvariantCulture)));
+
+                    using (var db = new AudioDbContext())
+                    {
+                        var feature = db.TrackFeatures.FirstOrDefault(f => f.TrackId == track.Id);
+                        if (feature == null)
+                        {
+                            db.TrackFeatures.Add(new TrackFeature { TrackId = track.Id, FeatureVector = mfccString });
+                        }
+                        else
+                        {
+                            feature.FeatureVector = mfccString;
+                        }
+                        db.SaveChanges();
+                    }
+
+                    if (wavPath != track.FilePath && File.Exists(wavPath))
+                        File.Delete(wavPath);
+                    processed++;
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show($"Ошибка при анализе трека {track.Title}:\n{ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            System.Windows.MessageBox.Show($"Сканирование завершено. Обработано треков: {processed}", "Сканирование", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
     }

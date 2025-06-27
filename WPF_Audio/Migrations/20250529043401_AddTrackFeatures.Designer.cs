@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WPF_Audio.Data;
 
@@ -10,9 +11,11 @@ using WPF_Audio.Data;
 namespace WPF_Audio.Migrations
 {
     [DbContext(typeof(AudioDbContext))]
-    partial class AudioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250529043401_AddTrackFeatures")]
+    partial class AddTrackFeatures
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.3");
@@ -24,27 +27,33 @@ namespace WPF_Audio.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Album")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FilePath")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Genre")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsLiked")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Performer")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Photo")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Year")
@@ -62,9 +71,11 @@ namespace WPF_Audio.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Action")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("KeyGesture")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -79,6 +90,7 @@ namespace WPF_Audio.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -136,6 +148,7 @@ namespace WPF_Audio.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("FeatureVector")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("TrackId")

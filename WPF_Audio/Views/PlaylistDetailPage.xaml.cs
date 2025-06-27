@@ -142,5 +142,10 @@ namespace WPF_Audio
                 }
             }
         }
+
+        private void ScanPlaylistTracksButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.ScanTracks();
+        }
     }
 }

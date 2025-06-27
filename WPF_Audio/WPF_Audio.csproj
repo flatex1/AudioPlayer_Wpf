@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>True</UseWindowsForms>
@@ -11,20 +11,23 @@
 
   <ItemGroup>
     <None Remove="Assets\default1.jpg" />
+    <None Remove="Assets\file-music.png" />
+    <None Remove="Assets\library.png" />
+    <None Remove="Assets\music.png" />
+    <None Remove="Assets\pause.png" />
+    <None Remove="Assets\play.png" />
+    <None Remove="Assets\play.svg" />
+    <None Remove="Assets\repeat.png" />
+    <None Remove="Assets\shuffle.png" />
+    <None Remove="Assets\skip-back.png" />
+    <None Remove="Assets\skip-forward.png" />
+    <None Remove="Assets\volume-up-solid.svg" />
+    <None Remove="Assets\volume.png" />
     <None Remove="Assets\топчим.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Page Remove="styles\style.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Assets\default1.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\топчим.jpg">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Content>
+    <Page Remove="Styles\style.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,11 +39,45 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="NWaves" Version="0.9.6" />
     <PackageReference Include="TagLibSharp" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="styles\style.xaml" />
+    <Content Include="Assets\file-music.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\library.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\music.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\pause.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\play.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\repeat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\shuffle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\skip-back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\skip-forward.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\volume-up-solid.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\volume.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Styles\Style.xaml" />
   </ItemGroup>
 
 </Project>

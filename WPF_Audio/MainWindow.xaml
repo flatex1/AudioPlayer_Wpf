@@ -9,15 +9,53 @@
             <Border Name="ReceiverColor" Background="#121212" BorderBrush="#0d0d0d" BorderThickness="6" CornerRadius="15">
                 <Grid>
                     <Border Name="Mask" Background="#121212" BorderBrush="#0d0d0d" BorderThickness="0.5" CornerRadius="13"/>
-                    <Image  x:Name="BackGround_photo" Source="C:\Users\kabin\Source\Repos\AudioPlayer_Wpf\WPF_Audio\Assets\default1.jpg"  Stretch="UniformToFill" 
-                            MinWidth="300" MinHeight="300">
-                        <Image.Effect>
-                            <BlurEffect Radius="30"/>
-                        </Image.Effect>
-                    </Image>
+                    
 
                     <Border x:Name="Overlay" Background="#121212" Opacity="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                     <Frame x:Name="PageFrame" Background="Transparent" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="GreetingText" Text="Доброе утро!" FontSize="24" FontWeight="Bold" Foreground="#fefefd" Margin="10,10,0,25" Grid.Row="0"/>
+                        <StackPanel x:Name="LikedTracksPanel" Grid.Row="1">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,4">
+                                <TextBlock Text="Любимые треки" FontSize="16" FontWeight="Bold" Foreground="#84a59d"/>
+                                <TextBlock Text=" (" FontSize="16" FontWeight="Bold" Foreground="#84a59d"/>
+                                <TextBlock Text="{Binding LikedTracks.Count}" FontSize="16" FontWeight="Bold" Foreground="#84a59d"/>
+                                <TextBlock Text=")" FontSize="16" FontWeight="Bold" Foreground="#84a59d"/>
+                            </StackPanel>
+                            <Grid>
+                                <ListBox x:Name="LikedTracksListBox" ItemsSource="{Binding LikedTracks}" Margin="10,0,10,10" VerticalAlignment="Top" Background="#181818" BorderThickness="0" Foreground="White" Height="180"
+                                         MouseDoubleClick="LikedTracksListBox_MouseDoubleClick">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="#222" CornerRadius="8" Padding="4" Margin="0,2">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Image Source="{Binding Photo, Converter={StaticResource StringToImageSourceConverter}}" Width="32" Height="32" Margin="0,0,8,0">
+                                                    </Image>
+                                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="13" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                                <TextBlock Text="У вас пока нет любимых треков" Foreground="#cece97" FontSize="15" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding LikedTracks.Count}" Value="0">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
                     <Grid.OpacityMask>
                         <VisualBrush Visual="{Binding ElementName=Mask}" />
                     </Grid.OpacityMask>
@@ -27,6 +65,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="90" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -42,22 +81,62 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Orientation="Vertical" Grid.Row="0" >
-                    <Button Content="Главная" Click="GoToHomePage" Tag="Home" Style="{StaticResource ButtonStyle}"/>
-                    <Button Content="Библиотека" Click="GoToLibraryPage" Tag="Book" Style="{StaticResource ButtonStyle}"/>
-                    <Button Content="Плейлисты" Click="GoToPlayListsPage" Tag="Music" Style="{StaticResource ButtonStyle}"/>
+                    <TextBlock Text="АудиоПлеер" FontSize="24" FontWeight="Bold" Foreground="#84a59d" Margin="0,20,0,0" HorizontalAlignment="Center"/>
+                    <Button Content="Главная" Width="180" Click="GoToHomePage" Tag="Home" Style="{StaticResource ButtonStyle}"/>
+                    <Button Content="Библиотека" Width="180" Click="GoToLibraryPage" Tag="Book" Style="{StaticResource ButtonStyle}"/>
+                    <Button Content="Плейлисты" Width="180" Click="GoToPlayListsPage" Tag="Music" Style="{StaticResource ButtonStyle}"/>
+                    <Button x:Name="SettingsButton"  Background="Transparent" BorderThickness="0" Margin="5, 30, 0, 0" Click="SettingsButton_Click" Style="{StaticResource ButtonStyle}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <fa:ImageAwesome Icon="Cog" Width="22" Height="22" Foreground="#84a59d" Margin="0,0,10,0"/>
+                            <TextBlock Text="Настройки" FontSize="16" Foreground="#84a59d" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </Grid>
 
-            <StackPanel x:Name="NowPlayingPanel" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                        Background="#F5F5F5" Opacity="0.9">
-                <Image x:Name="NowPlayingImage" Source="C:\Users\kabin\Source\Repos\AudioPlayer_Wpf\WPF_Audio\Assets\default1.jpg" 
-                       Stretch="Uniform" MaxWidth="250" MaxHeight="250"/>
-                <TextBlock x:Name="NowPlayingTitle" Text="Now Playing" FontSize="18" FontWeight="Bold" Foreground="Black" 
-                           HorizontalAlignment="Center" Margin="10,5,0,0"/>
-                <TextBlock x:Name="NowPlayingPerformer" Text="" FontSize="14" Foreground="Black" HorizontalAlignment="Center" Margin="0,5,0,0"/>
-            </StackPanel>
+            <!-- Блок похожих треков -->
+            <Border x:Name="SimilarTracksBlock"
+                    Grid.Row="1" Grid.Column="1"
+                    Background="#181818"
+                    CornerRadius="10"
+                    Margin="7,0,15,0"
+                    VerticalAlignment="Top"
+                    Visibility="{Binding IsSimilarTracksVisible, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BoolToVisibilityConverter}}">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10,10,10,0" VerticalAlignment="Bottom">
+                        <TextBlock Text="Похожие треки"
+                                   FontSize="15"
+                                   FontWeight="Bold"
+                                   Foreground="#A0A0A0"
+                                   VerticalAlignment="Center"/>
+                        <Button x:Name="ToggleSimilarTracksButton" Width="24" Height="24" Margin="10,0,0,0" Background="Transparent" BorderThickness="0" Click="ToggleSimilarTracksButton_Click">
+                            <TextBlock x:Name="ToggleSimilarTracksIcon" Text="▼" FontSize="15" Foreground="#A0A0A0" VerticalAlignment="Center"/>
+                        </Button>
+                        <Button x:Name="CloseSimilarTracksButton" Width="24" Height="24" Margin="2,0,0,0" Background="Transparent" BorderThickness="0" Click="CloseSimilarTracksButton_Click">
+                            <TextBlock Text="✖" FontSize="15" Foreground="#A0A0A0" VerticalAlignment="Center"/>
+                        </Button>
+                    </StackPanel>
+                    <ListBox x:Name="SimilarTracksListBox" ItemsSource="{Binding SimilarTracks, RelativeSource={RelativeSource AncestorType=Window}}" 
+                             Visibility="{Binding IsSimilarTracksExpanded, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource BoolToVisibilityConverter}}"
+                             Margin="10,5,10,10" Height="120" Background="Transparent" BorderThickness="0" Foreground="White"
+                             MouseDoubleClick="SimilarTracksListBox_MouseDoubleClick">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#222" CornerRadius="8" Padding="4" Margin="0,2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="{Binding Photo, Converter={StaticResource StringToImageSourceConverter}}" Width="32" Height="32" Margin="0,0,8,0">
+                                        </Image>
+                                        <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="13" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </Border>
 
-            <Border Grid.Row="1" Grid.Column="1" Background="#9c9c2f" Margin="7,0,15,10" CornerRadius="15">
+            <!-- Плеер -->
+            <Border Grid.Row="2" BorderBrush="DimGray" BorderThickness="0.7" Grid.Column="1" Background="#4a5759" Margin="7,0,15,10" CornerRadius="15">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -66,34 +145,49 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="10">
-                        <Image x:Name="ControlPanel_photo" Source="C:\Users\kabin\Source\Repos\AudioPlayer_Wpf\WPF_Audio\Assets\default1.jpg"
+                        <Image x:Name="ControlPanel_photo" Source="/Assets/file-music.png"
                    Stretch="UniformToFill" Width="60" Height="60"/>
-                        <StackPanel Orientation="Vertical" Margin="8,0" VerticalAlignment="Center" Width="150">
-                            <TextBlock x:Name="ControlPanelTitle" Text="Название" FontSize="14" Foreground="#fefefd" 
-                                       FontWeight="Bold" TextTrimming="CharacterEllipsis" />
+                        <StackPanel Orientation="Vertical" Margin="8,0" VerticalAlignment="Center" Width="120">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock x:Name="ControlPanelTitle" Text="Название" FontSize="14" Foreground="#fefefd" 
+                                           FontWeight="Bold" TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
                             <TextBlock x:Name="ControlPanelPerformer" Text="Исполнитель" FontSize="12" Foreground="#cece97" 
                                        FontWeight="Bold" TextTrimming="CharacterEllipsis" />
                         </StackPanel>
+                        <Button x:Name="LikeButton" Width="28" Height="28" Margin="0,0,0,0" Background="Transparent" BorderThickness="0" Click="LikeButton_Click">
+                            <fa:ImageAwesome x:Name="LikeIcon" Icon="Heart" Width="20" Height="20" Foreground="#cece97"/>
+                        </Button>
+                        <Button x:Name="EnhanceButton" Width="28" Height="28" Margin="8,0,0,0" Background="Transparent" BorderThickness="0" Click="EnhanceButton_Click">
+                            <fa:ImageAwesome Icon="Magic" Width="20" Height="20" Foreground="#A0A0A0"/>
+                        </Button>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-                            <Button x:Name="PrevButton" Tag="BackWard" Background="Transparent" Foreground="#444" 
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,-8">
+                            <Button x:Name="ShuffleButton" Width="32" Height="32" Background="Transparent" BorderThickness="0" Margin="0,10,10,10" Click="ShuffleButton_Click">
+                                <fa:ImageAwesome Icon="Random" Width="20" Height="20" Foreground="DarkGray"/>
+                            </Button>
+                            <Button x:Name="PrevButton" Tag="BackWard" Background="Transparent" Foreground="WhiteSmoke" 
                                     Margin="0,10,10,10" FontSize="14" Click="PrevButton_Click" Style="{StaticResource ButtonStyle}"/>
-                            <Button x:Name="PlayPauseButton" Tag="Play" Background="#0078D4" Foreground="White" Margin="0,10,0,10" FontSize="14" 
+                            <Button x:Name="PlayPauseButton" Tag="Play" Background="#0078D4" Foreground="WhiteSmoke" Margin="0,10,0,10" FontSize="14" 
                                     Padding="5" Click="PlayPauseButton_Click" Style="{StaticResource ButtonStyle}"/>
-                            <Button x:Name="NextButton" Tag="ForWard" Background="Transparent" Foreground="#444" Margin="10,10,0,10" 
+                            <Button x:Name="NextButton" Tag="ForWard" Background="Transparent" Foreground="WhiteSmoke" Margin="10,10,0,10" 
                                     FontSize="14" Click="NextButton_Click" Style="{StaticResource ButtonStyle}"/>
+                            <Button x:Name="RepeatButton" Width="32" Height="32" Background="Transparent" BorderThickness="0" Margin="10,10,0,10" Click="RepeatButton_Click">
+                                <fa:ImageAwesome x:Name="RepeatIcon" Icon="Repeat" Width="20" Height="20" Foreground="DarkGray"/>
+                            </Button>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,20,0">
-                            <TextBlock x:Name="CurrentTimeText" Text="00:00" VerticalAlignment="Center" Margin="10,0" />
+                            <TextBlock x:Name="CurrentTimeText" Text="00:00" Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="10,0" />
                             <Slider x:Name="ProgressSlider" Width="300" VerticalAlignment="Center" Minimum="0" 
                                     Maximum="100" ValueChanged="ProgressSlider_Value" />
-                            <TextBlock x:Name="TotalTimeText" Text="00:00" VerticalAlignment="Center" Margin="10,0" />
+                            <TextBlock x:Name="TotalTimeText" Text="00:00" Foreground="WhiteSmoke" VerticalAlignment="Center" Margin="10,0" />
                         </StackPanel>
                     </StackPanel>
                     <Slider x:Name="VolumeSlider" Grid.Column="2" Width="100" Margin="10,0,30,0" VerticalAlignment="Center"
                             Minimum="0" Maximum="1" Value="0.5" ValueChanged="VolumeSlider_Value" />
+                    <fa:ImageAwesome Icon="VolumeUp" Width="22" Height="22" Foreground="DarkGray" Grid.Column="2" Margin="-17,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 </Grid>
             </Border>
         </Grid>

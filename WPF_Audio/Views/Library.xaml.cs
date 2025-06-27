@@ -55,5 +55,10 @@ namespace WPF_Audio
         {
             ViewModel.OnAddFile();
         }
+
+        private void ScanTracksButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.ScanTracks();
+        }
     }
 }

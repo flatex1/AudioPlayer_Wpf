@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows;
 using WPF_Audio.Data;
 using Microsoft.EntityFrameworkCore;
+using WPF_Audio.Converters;
 
 namespace WPF_Audio
 {
@@ -15,10 +16,12 @@ namespace WPF_Audio
         {
             base.OnStartup(e);
 
-            using (var db = new AudioDbContext())
-            {
-                db.Database.Migrate();
-            }
+            Resources.Add("IntToVisibilityConverter", new IntToVisibilityConverter());
+            Resources.Add("BoolToVisibilityConverter", new BoolToVisibilityConverter());
+            Resources.Add("StringToImageSourceConverter", new StringToImageSourceConverter());
+
+            using var db = new AudioDbContext();
+            db.Database.Migrate();
         }
     }
 }
